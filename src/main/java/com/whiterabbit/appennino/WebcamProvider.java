@@ -19,8 +19,8 @@ import android.util.Log;
 import java.util.Date;
 
 public class WebcamProvider extends ContentProvider {
-    private static final String DATABASE_NAME = "dbFileDb.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "webcamdb.db";
+    private static final int DATABASE_VERSION = 4;
     private static final String TAG = "WebcamProvider";
 
 
@@ -240,10 +240,15 @@ public class WebcamProvider extends ContentProvider {
             c.clear();
             c.put(WEBCAM_RESORT_COLUMN, resort);
             c.put(WEBCAM_URL_COLUMN, url);
-            c.put(WEBCAM_LASTUPDATE_COLUMN, lastUpdate.getTime());
+            if(lastUpdate == null){
+                c.put(WEBCAM_LASTUPDATE_COLUMN, 0);
+            }else{
+                c.put(WEBCAM_LASTUPDATE_COLUMN, lastUpdate.getTime());
+            }
             c.put(WEBCAM_FAVOURITE_COLUMN, favourite);
             c.put(WEBCAM_FILENAME_COLUMN, fileName);
             c.put(WEBCAM_DESCRIPTION_COLUMN, description);
+            db.insert(WEBCAM_TABLE, null, c);
         }
 
         private void fillTables(SQLiteDatabase db){
@@ -269,6 +274,7 @@ public class WebcamProvider extends ContentProvider {
         @Override
         public void onCreate(SQLiteDatabase db) {      
             db.execSQL(DATABASE_WEBCAM_CREATE);
+            fillTables(db);
 			
         }
 
