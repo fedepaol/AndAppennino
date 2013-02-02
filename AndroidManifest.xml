@@ -10,9 +10,22 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+    <activity android:name=".DetailView"/>
     <provider android:name=".WebcamProvider"
                 android:authorities="com.whiterabbit.appennino"
               />
+    <service
+              android:enabled="true"
+              android:name="com.whiterabbit.postman.InteractionService" />
+    <service
+              android:enabled="true"
+              android:name="com.whiterabbit.postman.InteractionService1" />
+      <service
+              android:enabled="true"
+              android:name="com.whiterabbit.postman.InteractionService2" />
+    <service
+              android:enabled="true"
+              android:name="com.whiterabbit.postman.InteractionService3" />
   </application>
 
 </manifest>

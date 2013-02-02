@@ -1,5 +1,6 @@
 package com.whiterabbit.appennino;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,7 +25,10 @@ public class WebcamsListFragment extends SherlockListFragment{
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        ((FirstActivity)getSherlockActivity()).onWebcamSelected("aaa");
+        Cursor c = WebcamProviderClient.getWebcam(id, getSherlockActivity());
+        ((FirstActivity)getSherlockActivity()).onWebcamSelected(
+                                                    c.getString(WebcamProvider.WEBCAM_FILENAME_COLUMN_POSITION),
+                                                    c.getString(WebcamProvider.WEBCAM_DESCRIPTION_COLUMN_POSITION));
     }
 
 

@@ -1,6 +1,7 @@
 package com.whiterabbit.appennino;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -42,8 +43,9 @@ public class FirstActivity extends SherlockFragmentActivity implements ActionBar
     }
 
 
-    public void onWebcamSelected(String webcamName){
-
+    public void onWebcamSelected(String fileName, String url){
+        Intent i = new Intent(this, DetailView.class);
+        startActivity(i);
     }
 
     @Override
