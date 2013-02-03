@@ -11,6 +11,8 @@ import com.whiterabbit.appennino.com.whiterabbit.appennino.AppenninoApplication;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 import uk.co.senab.bitmapcache.CacheableImageView;
 
+import java.text.DateFormat;
+
 /**
  * Created with IntelliJ IDEA.
  * User: fedepaol
@@ -19,6 +21,7 @@ import uk.co.senab.bitmapcache.CacheableImageView;
  */
 public class WebcamDetailFragment extends SherlockFragment{
     private TextView mLocationName;
+    private TextView mLastUpdated;
     private CacheableImageView mWebcamImage;
     private AppenninoApplication mApplication;
 
@@ -52,9 +55,18 @@ public class WebcamDetailFragment extends SherlockFragment{
         super.onViewCreated(view, savedInstanceState);
         mLocationName = (TextView) view.findViewById(R.id.webcamdetail_location);
         mWebcamImage = (CacheableImageView) view.findViewById(R.id.webcamdetail_image);
+        mLastUpdated = (TextView) view.findViewById(R.id.webcamdetail_lastupdate);
     }
 
-    public void update(String location, String url){
+    public void update(String location, String url, long lastUpdate){
+        if(lastUpdate > 0){
+            DateFormat d = android.text.format.DateFormat.getDateFormat(getSherlockActivity());    // short date
+            DateFormat t = android.text.format.DateFormat.getTimeFormat(getSherlockActivity());    // short date
+            mLastUpdated.setText(String.format("%s: %s", d.format(lastUpdate), t.format(lastUpdate)));
+        }else{
+            mLastUpdated.setText("-- : --");
+        }
+
         mLocationName.setText(location);
         LoadTask loader = new LoadTask();
         loader.execute(url);

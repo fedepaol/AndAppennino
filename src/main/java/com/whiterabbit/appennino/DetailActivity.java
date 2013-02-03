@@ -2,6 +2,7 @@ package com.whiterabbit.appennino;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
@@ -20,11 +21,12 @@ import com.whiterabbit.postman.exceptions.SendingCommandException;
 public class DetailActivity extends SherlockFragmentActivity implements ServerInteractionResponseInterface {
     public static final String URL = "com.whiterabbit.appennino.url";
     public static final String TITLE = "com.whiterabbit.appennino.title";
-    public static final String FILENAME = "com.whiterabbit.appennino.filename";
+    public static final String LAST_UPDATE = "com.whiterabbit.appennino.lastupdate";
 
     private String mUrl;
     private String mTitle;
     private boolean mUpdating;
+    private long mLastUpdate;
 
     WebcamDetailFragment mDetailFragment;
     ServerInteractionHelper mServerHelper;
@@ -38,11 +40,13 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         Intent i = getIntent();
         mUrl = i.getStringExtra(URL);
         mTitle = i.getStringExtra(TITLE);
+        mLastUpdate = i.getLongExtra(LAST_UPDATE, 0);
+
 
         mServerHelper = ServerInteractionHelper.getInstance();
         mDetailFragment = (WebcamDetailFragment) getSupportFragmentManager().findFragmentById(R.id.webcam_detail_fragment);
 
-        mDetailFragment.update(mTitle, mUrl);
+        mDetailFragment.update(mTitle, mUrl, mLastUpdate);
     }
 
     @Override
@@ -57,7 +61,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     @Override
     public void onServerResult(String result, String requestId) {
         if(requestId.equals(mUrl)){
-            mDetailFragment.update(mTitle, mUrl);
+            mDetailFragment.update(mTitle, mUrl, mLastUpdate);
             setSupportProgressBarIndeterminateVisibility(false);
             updateDone();
         }
@@ -67,6 +71,8 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     public void onServerError(String result, String requestId) {
         setSupportProgressBarIndeterminateVisibility(false);
         updateDone();
+        Toast toast = Toast.makeText(this, getString(R.string.download_error), Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     @Override

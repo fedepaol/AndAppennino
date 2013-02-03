@@ -2,4 +2,5 @@
 <resources>
     <string name="hello">Hello AndAppennino!</string>
     <string name="app_name">AndAppennino</string>
+    <string name="download_error">There was a problem connecting to the server</string>
 </resources>

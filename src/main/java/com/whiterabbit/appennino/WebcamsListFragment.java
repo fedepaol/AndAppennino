@@ -31,7 +31,7 @@ public class WebcamsListFragment extends SherlockListFragment{
 
         if(c.moveToFirst()){
             ((FirstActivity)getSherlockActivity()).onWebcamSelected(
-                                                    c.getString(WebcamProvider.WEBCAM_FILENAME_COLUMN_POSITION),
+                                                    c.getLong(WebcamProvider.WEBCAM_LASTUPDATE_COLUMN_POSITION),
                                                     c.getString(WebcamProvider.WEBCAM_URL_COLUMN_POSITION),
                                                     c.getString(WebcamProvider.WEBCAM_DESCRIPTION_COLUMN_POSITION));
         }else{
