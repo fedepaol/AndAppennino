@@ -1,19 +1,14 @@
 package com.whiterabbit.appennino.com.whiterabbit.appennino.actions;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Parcel;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.AppenninoApplication;
 import com.whiterabbit.postman.commands.RestServerRequest;
 import com.whiterabbit.postman.exceptions.ResultParseException;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Verb;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import uk.co.senab.bitmapcache.BitmapLruCache;
 
 /**
  * Created with IntelliJ IDEA.
@@ -23,11 +18,9 @@ import java.io.IOException;
  */
 public class WebcamDownloadAction implements RestServerRequest{
     String mUrl;
-    String mFileName;
 
-    public WebcamDownloadAction(String url, String fileName){
+    public WebcamDownloadAction(String url){
         mUrl = url;
-        mFileName = fileName;
     }
 
 
@@ -48,19 +41,9 @@ public class WebcamDownloadAction implements RestServerRequest{
 
     @Override
     public void processHttpResult(Response result, Context context) throws ResultParseException {
-        Bitmap b = BitmapFactory.decodeStream(result.getStream());
-        File path = context.getExternalFilesDir(null);
-        File target = new File(path, mFileName);
-        FileOutputStream out = null;
-        try {
-            out = new FileOutputStream(target);
-            b.compress(Bitmap.CompressFormat.PNG, 90, out);
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // TODO Adjust size
+        BitmapLruCache cache = AppenninoApplication.getApplication().getBitmapCache();
+        cache.put(mUrl, result.getStream());
     }
 
     @Override
@@ -76,7 +59,6 @@ public class WebcamDownloadAction implements RestServerRequest{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(mUrl);
-        parcel.writeString(mFileName);
     }
 
     public static final Creator<WebcamDownloadAction> CREATOR
@@ -92,6 +74,5 @@ public class WebcamDownloadAction implements RestServerRequest{
 
     public WebcamDownloadAction(Parcel in){
         mUrl = in.readString();
-        mFileName = in.readString();
     }
 }

@@ -2,11 +2,13 @@ package com.whiterabbit.appennino;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.whiterabbit.postman.utils.Constants;
 
 public class WebcamsListFragment extends SherlockListFragment{
     private WebcamListAdapter mAdapter;
@@ -26,9 +28,17 @@ public class WebcamsListFragment extends SherlockListFragment{
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Cursor c = WebcamProviderClient.getWebcam(id, getSherlockActivity());
-        ((FirstActivity)getSherlockActivity()).onWebcamSelected(
+
+        if(c.moveToFirst()){
+            ((FirstActivity)getSherlockActivity()).onWebcamSelected(
                                                     c.getString(WebcamProvider.WEBCAM_FILENAME_COLUMN_POSITION),
+                                                    c.getString(WebcamProvider.WEBCAM_URL_COLUMN_POSITION),
                                                     c.getString(WebcamProvider.WEBCAM_DESCRIPTION_COLUMN_POSITION));
+        }else{
+            //That would be a surprise..
+            Log.d(Constants.LOG_TAG, "Location not found!!");
+            throw new IllegalArgumentException("Invalid location id:" + id);
+        }
     }
 
 

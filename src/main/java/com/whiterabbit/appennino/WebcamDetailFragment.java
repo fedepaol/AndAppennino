@@ -1,19 +1,15 @@
 package com.whiterabbit.appennino;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import com.actionbarsherlock.app.SherlockFragment;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.AppenninoApplication;
+import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
+import uk.co.senab.bitmapcache.CacheableImageView;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,34 +17,33 @@ import java.io.InputStream;
  * Date: 1/31/13
  * Time: 11:59 PM
  */
-public class WebcamDetailFragment extends Fragment {
+public class WebcamDetailFragment extends SherlockFragment{
     private TextView mLocationName;
-    private String mFilename;
-    private LoadTaks mLoader;
+    private CacheableImageView mWebcamImage;
+    private AppenninoApplication mApplication;
 
 
-    private class LoadTaks extends AsyncTask<String, Void, Bitmap> {
+    private class LoadTask extends AsyncTask<String, Void, CacheableBitmapDrawable> {
 
         @Override
-        protected Bitmap doInBackground(String... strings) {
-            File path = WebcamDetailFragment.this.getActivity().getExternalFilesDir(null);
-            File image = new File(path, strings[0]);
+        protected CacheableBitmapDrawable doInBackground(String... strings) {
+            return mApplication.getBitmapCache().get(strings[0]);
+        }
 
-            try {
-                InputStream s = new FileInputStream(image);
-                Bitmap bitmap = BitmapFactory.decodeStream(s);
-                return bitmap;
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+        @Override
+        protected void onPostExecute(CacheableBitmapDrawable bitmap) {
+            if(bitmap != null){
+                mWebcamImage.setImageDrawable(bitmap);
+            }else{
+                // TODO Set default
             }
-            return null;
         }
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mLoader = new LoadTaks();
+        mApplication = AppenninoApplication.getApplication();
         return inflater.inflate(R.layout.webcam_detail, container, false);
     }
 
@@ -56,14 +51,13 @@ public class WebcamDetailFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLocationName = (TextView) view.findViewById(R.id.webcamdetail_location);
-
+        mWebcamImage = (CacheableImageView) view.findViewById(R.id.webcamdetail_image);
     }
 
-    public void update(String location, String filename){
+    public void update(String location, String url){
         mLocationName.setText(location);
-        mFilename = filename;
-        mLoader.execute(filename);
-
+        LoadTask loader = new LoadTask();
+        loader.execute(url);
     }
 
 
