@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProvider;
 
 /**
  * Adapter class to show webcam list. In case of already loaded image it will show a thumbnail

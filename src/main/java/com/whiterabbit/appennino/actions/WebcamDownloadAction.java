@@ -1,14 +1,17 @@
-package com.whiterabbit.appennino.com.whiterabbit.appennino.actions;
+package com.whiterabbit.appennino.actions;
 
 import android.content.Context;
 import android.os.Parcel;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.AppenninoApplication;
+import com.whiterabbit.appennino.AppenninoApplication;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProviderClientExt;
 import com.whiterabbit.postman.commands.RestServerRequest;
 import com.whiterabbit.postman.exceptions.ResultParseException;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Verb;
 import uk.co.senab.bitmapcache.BitmapLruCache;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,16 +20,18 @@ import uk.co.senab.bitmapcache.BitmapLruCache;
  * Time: 12:10 PM
  */
 public class WebcamDownloadAction implements RestServerRequest{
+    long mWebcamId;
     String mUrl;
 
-    public WebcamDownloadAction(String url){
+    public WebcamDownloadAction(String url, long webcamid){
         mUrl = url;
+        mWebcamId = webcamid;
     }
 
 
     @Override
     public String getOAuthSigner() {
-        return null;  // No signer:w
+        return null;  // No signer
     }
 
     @Override
@@ -44,6 +49,7 @@ public class WebcamDownloadAction implements RestServerRequest{
         // TODO Adjust size
         BitmapLruCache cache = AppenninoApplication.getApplication().getBitmapCache();
         cache.put(mUrl, result.getStream());
+        WebcamProviderClientExt.updateWebcamLastUpdate(mWebcamId, new Date(), context);
     }
 
     @Override
@@ -59,6 +65,7 @@ public class WebcamDownloadAction implements RestServerRequest{
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(mUrl);
+        parcel.writeLong(mWebcamId);
     }
 
     public static final Creator<WebcamDownloadAction> CREATOR
@@ -74,5 +81,6 @@ public class WebcamDownloadAction implements RestServerRequest{
 
     public WebcamDownloadAction(Parcel in){
         mUrl = in.readString();
+        mWebcamId = in.readLong();
     }
 }

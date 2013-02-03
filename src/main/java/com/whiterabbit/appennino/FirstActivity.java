@@ -10,7 +10,8 @@ import android.support.v4.content.Loader;
 import android.widget.ArrayAdapter;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.utils.PrefUtils;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProvider;
+import com.whiterabbit.appennino.utils.PrefUtils;
 
 public class FirstActivity extends SherlockFragmentActivity implements ActionBar.OnNavigationListener, LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -22,11 +23,11 @@ public class FirstActivity extends SherlockFragmentActivity implements ActionBar
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mResort = PrefUtils.getSavedResort(this);
         setupNavigation();
         setContentView(R.layout.main);
         mWebcamList = (WebcamsListFragment) getSupportFragmentManager().findFragmentById(R.id.webcams_fragment);
 
-        mResort = PrefUtils.getSavedResort(this);
     }
 
 
@@ -50,11 +51,12 @@ public class FirstActivity extends SherlockFragmentActivity implements ActionBar
     }
 
 
-    public void onWebcamSelected(long lastUpdate, String url, String description){
+    public void onWebcamSelected(long lastUpdate, String url, String description, long id){
         Intent i = new Intent(this, DetailActivity.class);
         i.putExtra(DetailActivity.URL, url);
         i.putExtra(DetailActivity.TITLE, description);
         i.putExtra(DetailActivity.LAST_UPDATE, lastUpdate);
+        i.putExtra(DetailActivity.WEBCAM_ID, id);
         startActivity(i);
     }
 

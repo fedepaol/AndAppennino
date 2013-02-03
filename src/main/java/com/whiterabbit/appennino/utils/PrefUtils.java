@@ -1,4 +1,4 @@
-package com.whiterabbit.appennino.com.whiterabbit.appennino.utils;
+package com.whiterabbit.appennino.utils;
 
 import android.app.Activity;
 import android.content.Context;

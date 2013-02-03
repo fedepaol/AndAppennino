@@ -9,7 +9,7 @@
 
 
     <application android:icon="@drawable/icon" android:label="@string/app_name"
-          android:name=".com.whiterabbit.appennino.AppenninoApplication"
+          android:name=".AppenninoApplication"
           android:theme="@style/Theme.Sherlock">
     <activity android:name=".FirstActivity">
       <intent-filter>
@@ -18,7 +18,7 @@
       </intent-filter>
     </activity>
     <activity android:name=".DetailActivity"/>
-    <provider android:name=".WebcamProvider"
+    <provider android:name=".com.whiterabbit.appennino.data.WebcamProvider"
                 android:authorities="com.whiterabbit.appennino"
               />
     <service

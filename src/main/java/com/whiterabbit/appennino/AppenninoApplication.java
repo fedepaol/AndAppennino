@@ -1,4 +1,4 @@
-package com.whiterabbit.appennino.com.whiterabbit.appennino;
+package com.whiterabbit.appennino;
 
 import android.app.Application;
 import android.os.Environment;

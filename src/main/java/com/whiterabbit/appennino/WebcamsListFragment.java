@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProvider;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProviderClient;
 import com.whiterabbit.postman.utils.Constants;
 
 public class WebcamsListFragment extends SherlockListFragment{
@@ -33,7 +35,8 @@ public class WebcamsListFragment extends SherlockListFragment{
             ((FirstActivity)getSherlockActivity()).onWebcamSelected(
                                                     c.getLong(WebcamProvider.WEBCAM_LASTUPDATE_COLUMN_POSITION),
                                                     c.getString(WebcamProvider.WEBCAM_URL_COLUMN_POSITION),
-                                                    c.getString(WebcamProvider.WEBCAM_DESCRIPTION_COLUMN_POSITION));
+                                                    c.getString(WebcamProvider.WEBCAM_DESCRIPTION_COLUMN_POSITION),
+                                                    id);
         }else{
             //That would be a surprise..
             Log.d(Constants.LOG_TAG, "Location not found!!");

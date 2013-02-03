@@ -7,7 +7,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.actions.WebcamDownloadAction;
+import com.whiterabbit.appennino.actions.WebcamDownloadAction;
 import com.whiterabbit.postman.ServerInteractionHelper;
 import com.whiterabbit.postman.ServerInteractionResponseInterface;
 import com.whiterabbit.postman.exceptions.SendingCommandException;
@@ -22,9 +22,11 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     public static final String URL = "com.whiterabbit.appennino.url";
     public static final String TITLE = "com.whiterabbit.appennino.title";
     public static final String LAST_UPDATE = "com.whiterabbit.appennino.lastupdate";
+    public static final String WEBCAM_ID = "com.whiterabbit.appennino.webcamid";
 
     private String mUrl;
     private String mTitle;
+    private long mWebcamId;
     private boolean mUpdating;
     private long mLastUpdate;
 
@@ -41,12 +43,13 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         mUrl = i.getStringExtra(URL);
         mTitle = i.getStringExtra(TITLE);
         mLastUpdate = i.getLongExtra(LAST_UPDATE, 0);
+        mWebcamId = i.getLongExtra(WEBCAM_ID, 0);
 
 
         mServerHelper = ServerInteractionHelper.getInstance();
         mDetailFragment = (WebcamDetailFragment) getSupportFragmentManager().findFragmentById(R.id.webcam_detail_fragment);
 
-        mDetailFragment.update(mTitle, mUrl, mLastUpdate);
+        mDetailFragment.update(mTitle, mUrl, mWebcamId);
     }
 
     @Override
@@ -61,7 +64,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     @Override
     public void onServerResult(String result, String requestId) {
         if(requestId.equals(mUrl)){
-            mDetailFragment.update(mTitle, mUrl, mLastUpdate);
+            mDetailFragment.update(mTitle, mUrl, mWebcamId);
             setSupportProgressBarIndeterminateVisibility(false);
             updateDone();
         }
@@ -85,7 +88,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
         if(item.getTitle().equals("Refresh")){
             try {
-                mServerHelper.sendRestAction(this, mUrl, new WebcamDownloadAction(mUrl));
+                mServerHelper.sendRestAction(this, mUrl, new WebcamDownloadAction(mUrl, mWebcamId));
                 setUpdating();
                 return true;
             } catch (SendingCommandException e) {

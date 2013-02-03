@@ -1,7 +1,7 @@
 /**********************************************************************************************************************************************************************
 ****** AUTO GENERATED FILE BY ANDROID SQLITE HELPER SCRIPT BY FEDERICO PAOLINELLI. ANY CHANGE WILL BE WIPED OUT IF THE SCRIPT IS PROCESSED AGAIN. *******
 **********************************************************************************************************************************************************************/
-package com.whiterabbit.appennino;
+package com.whiterabbit.appennino.com.whiterabbit.appennino.data;
 
 
 import android.content.*;
@@ -16,17 +16,16 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
-import java.util.Date;
-
 public class WebcamProvider extends ContentProvider {
-    private static final String DATABASE_NAME = "webcamdb.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final String DATABASE_NAME = "dbFileDb.db";
+    private static final int DATABASE_VERSION = 1;
     private static final String TAG = "WebcamProvider";
 
 
     // -------------- URIS ------------
 
     public static final Uri WEBCAM_URI = Uri.parse("content://com.whiterabbit.appennino/webcam");
+    public static final Uri RESORTWEATHER_URI = Uri.parse("content://com.whiterabbit.appennino/resortweather");
 
 
     public static final String ROW_ID = "_id";
@@ -44,11 +43,30 @@ public class WebcamProvider extends ContentProvider {
     public static final int WEBCAM_LASTUPDATE_COLUMN_POSITION = 4;
     public static final String WEBCAM_FAVOURITE_COLUMN = "Favourite";
     public static final int WEBCAM_FAVOURITE_COLUMN_POSITION = 5;
-    public static final String WEBCAM_FILENAME_COLUMN = "FileName";
-    public static final int WEBCAM_FILENAME_COLUMN_POSITION = 6;
 
     private static final int ALLWEBCAM= 1;
     private static final int SINGLE_WEBCAM= 2;
+
+
+
+    // -------------- RESORTWEATHER DEFINITIONS ------------
+
+    public static final String RESORTWEATHER_TABLE = "ResortWeather";
+    public static final String RESORTWEATHER_RESORT_COLUMN = "Resort";
+    public static final int RESORTWEATHER_RESORT_COLUMN_POSITION = 1;
+    public static final String RESORTWEATHER_DESCRIPTION_COLUMN = "Description";
+    public static final int RESORTWEATHER_DESCRIPTION_COLUMN_POSITION = 2;
+    public static final String RESORTWEATHER_TEMPERATURE_COLUMN = "Temperature";
+    public static final int RESORTWEATHER_TEMPERATURE_COLUMN_POSITION = 3;
+    public static final String RESORTWEATHER_WIND_COLUMN = "Wind";
+    public static final int RESORTWEATHER_WIND_COLUMN_POSITION = 4;
+    public static final String RESORTWEATHER_VISIBILITY_COLUMN = "Visibility";
+    public static final int RESORTWEATHER_VISIBILITY_COLUMN_POSITION = 5;
+    public static final String RESORTWEATHER_ICONURL_COLUMN = "IconUrl";
+    public static final int RESORTWEATHER_ICONURL_COLUMN_POSITION = 6;
+
+    private static final int ALLRESORTWEATHER= 3;
+    private static final int SINGLE_RESORTWEATHER= 4;
 
 
 
@@ -57,6 +75,8 @@ public class WebcamProvider extends ContentProvider {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI("com.whiterabbit.appennino", "webcam", ALLWEBCAM);
         uriMatcher.addURI("com.whiterabbit.appennino", "webcam/#", SINGLE_WEBCAM);
+        uriMatcher.addURI("com.whiterabbit.appennino", "resortweather", ALLRESORTWEATHER);
+        uriMatcher.addURI("com.whiterabbit.appennino", "resortweather/#", SINGLE_RESORTWEATHER);
     }
 
     // -------- TABLES CREATION ----------
@@ -68,8 +88,18 @@ public class WebcamProvider extends ContentProvider {
 				 WEBCAM_URL_COLUMN + " text  " + ", " + 
 				 WEBCAM_DESCRIPTION_COLUMN + " text  " + ", " + 
 				 WEBCAM_LASTUPDATE_COLUMN + " integer  " + ", " + 
-				 WEBCAM_FAVOURITE_COLUMN + " integer  " + ", " + 
-				 WEBCAM_FILENAME_COLUMN + " text  " + ");";
+				 WEBCAM_FAVOURITE_COLUMN + " integer  " + ");";
+
+
+    // ResortWeather CREATION 
+    private static final String DATABASE_RESORTWEATHER_CREATE = "create table " + RESORTWEATHER_TABLE + " (" + 
+				 ROW_ID + " integer primary key autoincrement" + ", " + 
+				 RESORTWEATHER_RESORT_COLUMN + " text  " + ", " + 
+				 RESORTWEATHER_DESCRIPTION_COLUMN + " text  " + ", " + 
+				 RESORTWEATHER_TEMPERATURE_COLUMN + " text  " + ", " + 
+				 RESORTWEATHER_WIND_COLUMN + " text  " + ", " + 
+				 RESORTWEATHER_VISIBILITY_COLUMN + " text  " + ", " + 
+				 RESORTWEATHER_ICONURL_COLUMN + " text  " + ");";
 
 
 
@@ -91,6 +121,9 @@ public class WebcamProvider extends ContentProvider {
             case ALLWEBCAM:
             case SINGLE_WEBCAM:
                 return WEBCAM_TABLE;
+            case ALLRESORTWEATHER:
+            case SINGLE_RESORTWEATHER:
+                return RESORTWEATHER_TABLE;
             default: break;
         }
 
@@ -107,6 +140,9 @@ public class WebcamProvider extends ContentProvider {
             case ALLWEBCAM:
             case SINGLE_WEBCAM:
                 return WEBCAM_URI;
+            case ALLRESORTWEATHER:
+            case SINGLE_RESORTWEATHER:
+                return RESORTWEATHER_URI;
             default: break;
         }
 
@@ -134,6 +170,7 @@ public class WebcamProvider extends ContentProvider {
         // If this is a row query, limit the result set to the passed in row.
         switch (uriMatcher.match(uri)) {
             case SINGLE_WEBCAM:
+            case SINGLE_RESORTWEATHER:
                 String rowID = uri.getPathSegments().get(1);
                 queryBuilder.appendWhere(ROW_ID + "=" + rowID);
             default: break;
@@ -161,6 +198,10 @@ public class WebcamProvider extends ContentProvider {
                 return "vnd.android.cursor.dir/vnd.com.whiterabbit.appennino.webcam";
             case SINGLE_WEBCAM:
                 return "vnd.android.cursor.dir/vnd.com.whiterabbit.appennino.webcam";
+            case ALLRESORTWEATHER:
+                return "vnd.android.cursor.dir/vnd.com.whiterabbit.appennino.resortweather";
+            case SINGLE_RESORTWEATHER:
+                return "vnd.android.cursor.dir/vnd.com.whiterabbit.appennino.resortweather";
             default:
                 throw new IllegalArgumentException("Unsupported URI: " + uri);
             }
@@ -172,6 +213,7 @@ public class WebcamProvider extends ContentProvider {
 
         switch (uriMatcher.match(uri)) {
             case SINGLE_WEBCAM:
+            case SINGLE_RESORTWEATHER:
                 String rowID = uri.getPathSegments().get(1);
                 selection = ROW_ID + "=" + rowID + (!TextUtils.isEmpty(selection) ?  " AND (" + selection + ')' : "");
             default: break;
@@ -214,6 +256,7 @@ public class WebcamProvider extends ContentProvider {
 
         // If this is a row URI, limit the deletion to the specified row.
         switch (uriMatcher.match(uri)) {             case SINGLE_WEBCAM:
+            case SINGLE_RESORTWEATHER:
                 String rowID = uri.getPathSegments().get(1);
                 selection = ROW_ID + "=" + rowID + (!TextUtils.isEmpty(selection) ? " AND (" + selection + ')' : "");
             default: break;
@@ -235,31 +278,25 @@ public class WebcamProvider extends ContentProvider {
             super(context, name, factory, version);
         }
 
-
-        private void fillRow(SQLiteDatabase db, ContentValues c, String resort, String url, Date lastUpdate, boolean  favourite, String fileName, String description){
+        private void fillRow(SQLiteDatabase db, ContentValues c, String resort, String url, boolean  favourite, String description){
             c.clear();
             c.put(WEBCAM_RESORT_COLUMN, resort);
             c.put(WEBCAM_URL_COLUMN, url);
-            if(lastUpdate == null){
-                c.put(WEBCAM_LASTUPDATE_COLUMN, 0);
-            }else{
-                c.put(WEBCAM_LASTUPDATE_COLUMN, lastUpdate.getTime());
-            }
+            c.put(WEBCAM_LASTUPDATE_COLUMN, 0);
             c.put(WEBCAM_FAVOURITE_COLUMN, favourite);
-            c.put(WEBCAM_FILENAME_COLUMN, fileName);
             c.put(WEBCAM_DESCRIPTION_COLUMN, description);
             db.insert(WEBCAM_TABLE, null, c);
         }
+
 
         private void fillTables(SQLiteDatabase db){
             try{
                 db.beginTransaction();
                 ContentValues contentValues = new ContentValues();
-                fillRow(db, contentValues, "Abetone", "http://www.aptabetone.it/abetone/pics/lat001.jpg", null, false, "piazza_abetone.jpg", "Piazzale abetone");
-                fillRow(db, contentValues, "Abetone", "http://www.meteo-system.com/stazioni/valdiluce.jpg", null, false, "valdiluce.jpg", "Val di luce");
-                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-9.jpg", null, false, "montegomito.jpg", "Monte gomito");
-
-                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/funivia.jpg", null, false, "passodellupo.jpg", "Passo del lupo");
+                fillRow(db, contentValues, "Abetone", "http://www.aptabetone.it/abetone/pics/lat001.jpg", false, "Piazzale abetone");
+                fillRow(db, contentValues, "Abetone", "http://www.meteo-system.com/stazioni/valdiluce.jpg", false, "Val di luce");
+                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-9.jpg", false, "Monte gomito");
+                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/funivia.jpg", false, "Passo del lupo");
 
 
                 db.setTransactionSuccessful();
@@ -269,11 +306,13 @@ public class WebcamProvider extends ContentProvider {
             }
         }
 
+
         // Called when no database exists in disk and the helper class needs
         // to create a new one. 
         @Override
         public void onCreate(SQLiteDatabase db) {      
             db.execSQL(DATABASE_WEBCAM_CREATE);
+			db.execSQL(DATABASE_RESORTWEATHER_CREATE);
             fillTables(db);
 			
         }
@@ -293,6 +332,7 @@ public class WebcamProvider extends ContentProvider {
 
             // The simplest case is to drop the old table and create a new one.
             db.execSQL("DROP TABLE IF EXISTS " + WEBCAM_TABLE + ";");
+			db.execSQL("DROP TABLE IF EXISTS " + RESORTWEATHER_TABLE + ";");
 			
             // Create a new one.
             onCreate(db);

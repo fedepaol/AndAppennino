@@ -1,5 +1,6 @@
 package com.whiterabbit.appennino;
 
+import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,7 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.AppenninoApplication;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProvider;
+import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProviderClient;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 import uk.co.senab.bitmapcache.CacheableImageView;
 
@@ -23,6 +25,7 @@ public class WebcamDetailFragment extends SherlockFragment{
     private TextView mLocationName;
     private TextView mLastUpdated;
     private CacheableImageView mWebcamImage;
+    private long mWebcamId;
     private AppenninoApplication mApplication;
 
 
@@ -58,7 +61,10 @@ public class WebcamDetailFragment extends SherlockFragment{
         mLastUpdated = (TextView) view.findViewById(R.id.webcamdetail_lastupdate);
     }
 
-    public void update(String location, String url, long lastUpdate){
+    public void update(String location, String url, long webcamId){
+        Cursor c = WebcamProviderClient.getWebcam(webcamId, getSherlockActivity());
+        c.moveToFirst();
+        long lastUpdate = c.getLong(WebcamProvider.WEBCAM_LASTUPDATE_COLUMN_POSITION);
         if(lastUpdate > 0){
             DateFormat d = android.text.format.DateFormat.getDateFormat(getSherlockActivity());    // short date
             DateFormat t = android.text.format.DateFormat.getTimeFormat(getSherlockActivity());    // short date
