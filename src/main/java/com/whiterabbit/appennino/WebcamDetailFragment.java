@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProvider;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProviderClient;
+import com.whiterabbit.appennino.data.WebcamProvider;
+import com.whiterabbit.appennino.data.WebcamProviderClient;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 import uk.co.senab.bitmapcache.CacheableImageView;
 

@@ -30,8 +30,8 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     private boolean mUpdating;
     private long mLastUpdate;
 
-    WebcamDetailFragment mDetailFragment;
-    ServerInteractionHelper mServerHelper;
+    private WebcamDetailFragment mDetailFragment;
+    private ServerInteractionHelper mServerHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -46,7 +46,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         mWebcamId = i.getLongExtra(WEBCAM_ID, 0);
 
 
-        mServerHelper = ServerInteractionHelper.getInstance();
+        mServerHelper = ServerInteractionHelper.getInstance(this);
         mDetailFragment = (WebcamDetailFragment) getSupportFragmentManager().findFragmentById(R.id.webcam_detail_fragment);
 
         mDetailFragment.update(mTitle, mUrl, mWebcamId);
@@ -81,7 +81,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
     @Override
     protected void onPause() {
         super.onPause();
-        ServerInteractionHelper.getInstance().unregisterEventListener(this, this);
+        mServerHelper.unregisterEventListener(this, this);
     }
 
     @Override

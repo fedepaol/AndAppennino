@@ -11,7 +11,6 @@
     <properties>
         <platform.version>4.0.3_r3</platform.version>
     </properties>
-
     <dependencies>
         <dependency>
             <groupId>android</groupId>
@@ -48,7 +47,24 @@
                     <artifactId>support-v4</artifactId>
                 </exclusion>
             </exclusions>
-
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <type>jar</type>
+            <version>1.9.11</version>
+        </dependency>
+        <dependency>
+             <groupId>android.support</groupId>
+             <artifactId>compatibility-v7-gridlayout</artifactId>
+             <version>10</version>
+             <type>apklib</type>
+        </dependency>
+        <dependency>
+             <groupId>android.support</groupId>
+             <artifactId>compatibility-v7-gridlayout</artifactId>
+             <version>10</version>
+             <type>jar</type>
         </dependency>
     </dependencies>
 

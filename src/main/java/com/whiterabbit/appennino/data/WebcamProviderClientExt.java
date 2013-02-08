@@ -40,7 +40,8 @@ public class WebcamProviderClientExt extends WebcamProviderClient{
                 WebcamProvider.RESORTWEATHER_TEMPERATURE_COLUMN,
                 WebcamProvider.RESORTWEATHER_WIND_COLUMN,
                 WebcamProvider.RESORTWEATHER_VISIBILITY_COLUMN,
-                WebcamProvider.RESORTWEATHER_ICONURL_COLUMN  };
+                WebcamProvider.RESORTWEATHER_ICONURL_COLUMN,
+                WebcamProvider.RESORTWEATHER_WEATHERCODE_COLUMN};
 
         String where = "Resort=?";
         String whereArgs[] = new String[]{resort};

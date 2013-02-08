@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- File created by the Android Action Bar Style Generator
+
+     Copyright (C) 2012 readyState Software Ltd
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources>
+
+    <style name="Theme.appennino" parent="@style/Theme.Sherlock.Light">
+
+        <item name="android:windowBackground">@drawable/sfondo</item>
+        <item name="actionBarItemBackground">@drawable/selectable_background_appennino</item>
+        <item name="popupMenuStyle">@style/appennino_PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/appennino_DropDownListView</item>
+        <item name="actionBarTabStyle">@style/appennino_ActionBarTabStyle</item>
+        <item name="actionDropDownStyle">@style/appennino_DropDownNav</item>
+        <item name="actionBarStyle">@style/appennino_solid_ActionBar</item>
+
+        <item name="android:actionBarItemBackground">@drawable/selectable_background_appennino</item>
+        <item name="android:popupMenuStyle">@style/appennino_PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/appennino_DropDownListView</item>
+        <item name="android:actionBarTabStyle">@style/appennino_ActionBarTabStyle</item>
+        <item name="android:actionDropDownStyle">@style/appennino_DropDownNav</item>
+        <item name="android:actionBarStyle">@style/appennino_solid_ActionBar</item>
+        <item name="android:panelBackground">@drawable/menu_hardkey_panel_appennino</item>
+
+
+        <!-- Personalized spinner color -->
+        <item name="android:spinnerItemStyle">@style/appennino_DropDownItem</item>
+
+    </style>
+
+    <style name="AndAppennino.ActionBar.TitleTextStyle" parent="TextAppearance.Sherlock.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/lightest_brown</item>
+    </style>
+
+    <style name="appennino_solid_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar.Solid">
+        <item name="background">@drawable/ab_solid_appennino</item>
+        <item name="backgroundStacked">@drawable/ab_stacked_solid_appennino</item>
+        <item name="backgroundSplit">@drawable/ab_bottom_solid_appennino</item>
+        <item name="progressBarStyle">@style/appennino_ProgressBar</item>
+
+        <item name="android:background">@drawable/ab_solid_appennino</item>
+        <item name="android:backgroundStacked">@drawable/ab_stacked_solid_appennino</item>
+        <item name="android:backgroundSplit">@drawable/ab_bottom_solid_appennino</item>
+        <item name="android:progressBarStyle">@style/appennino_ProgressBar</item>
+
+        <!-- personalized text color -->
+        <item name="android:titleTextStyle">@style/AndAppennino.ActionBar.TitleTextStyle</item>
+    </style>
+
+    <style name="appennino_transparent_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar">
+        <item name="background">@drawable/ab_transparent_appennino</item>
+        <item name="progressBarStyle">@style/appennino_ProgressBar</item>
+        
+        <item name="android:background">@drawable/ab_transparent_appennino</item>
+        <item name="android:progressBarStyle">@style/appennino_ProgressBar</item>
+    </style>
+	
+    <style name="appennino_PopupMenu" parent="@style/Widget.Sherlock.Light.ListPopupWindow">	
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_appennino</item>	
+    </style>
+
+    <style name="appennino_DropDownItem" parent="@style/Widget.Sherlock.TextView.SpinnerItem">
+        <item name="android:textColor">@color/lightest_brown</item>
+    </style>
+
+    <style name="appennino_DropDownListView" parent="@style/Widget.Sherlock.Light.ListView.DropDown">
+        <item name="android:listSelector">@drawable/selectable_background_appennino</item>
+    </style>
+
+    <style name="appennino_ActionBarTabStyle" parent="@style/Widget.Sherlock.Light.ActionBar.TabView">
+        <item name="background">@drawable/tab_indicator_ab_appennino</item>
+
+        <item name="android:background">@drawable/tab_indicator_ab_appennino</item>
+    </style>
+
+    <style name="appennino_DropDownNav" parent="@style/Widget.Sherlock.Light.Spinner.DropDown.ActionBar">
+        <item name="android:textColor">@color/lightest_brown</item>
+        <item name="background">@drawable/spinner_background_ab_appennino</item>
+
+        <item name="android:background">@drawable/spinner_background_ab_appennino</item>
+        <item name="android:popupBackground">@drawable/menu_dropdown_panel_appennino</item>
+        <item name="android:dropDownSelector">@drawable/selectable_background_appennino</item>
+    </style>
+    
+    <style name="appennino_ProgressBar" parent="@style/Widget.Sherlock.Light.ProgressBar.Horizontal">
+        <item name="android:progressDrawable">@drawable/progress_horizontal_appennino</item>
+    </style>
+    
+    <!-- this style is only referenced in a Light.DarkActionBar based theme -->
+    <style name="Theme.appennino.widget" parent="@style/Theme.Sherlock">
+        <item name="popupMenuStyle">@style/appennino_PopupMenu</item>
+        <item name="dropDownListViewStyle">@style/appennino_DropDownListView</item>
+        
+        <item name="android:popupMenuStyle">@style/appennino_PopupMenu</item>
+        <item name="android:dropDownListViewStyle">@style/appennino_DropDownListView</item>
+    </style>
+
+</resources>

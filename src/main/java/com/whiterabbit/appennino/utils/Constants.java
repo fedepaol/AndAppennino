@@ -6,7 +6,7 @@ package com.whiterabbit.appennino.utils;
  * Date: 2/2/13
  * Time: 7:27 PM
  */
-public class Constants {
+class Constants {
     private Constants(){
 
     }

@@ -18,7 +18,7 @@ import android.util.Log;
 
 public class WebcamProvider extends ContentProvider {
     private static final String DATABASE_NAME = "dbFileDb.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 10;
     private static final String TAG = "WebcamProvider";
 
 
@@ -64,6 +64,8 @@ public class WebcamProvider extends ContentProvider {
     public static final int RESORTWEATHER_VISIBILITY_COLUMN_POSITION = 5;
     public static final String RESORTWEATHER_ICONURL_COLUMN = "IconUrl";
     public static final int RESORTWEATHER_ICONURL_COLUMN_POSITION = 6;
+    public static final String RESORTWEATHER_WEATHERCODE_COLUMN = "WeatherCode";
+    public static final int RESORTWEATHER_WEATHERCODE_COLUMN_POSITION = 7;
 
     private static final int ALLRESORTWEATHER= 3;
     private static final int SINGLE_RESORTWEATHER= 4;
@@ -99,7 +101,8 @@ public class WebcamProvider extends ContentProvider {
 				 RESORTWEATHER_TEMPERATURE_COLUMN + " text  " + ", " + 
 				 RESORTWEATHER_WIND_COLUMN + " text  " + ", " + 
 				 RESORTWEATHER_VISIBILITY_COLUMN + " text  " + ", " + 
-				 RESORTWEATHER_ICONURL_COLUMN + " text  " + ");";
+				 RESORTWEATHER_ICONURL_COLUMN + " text  " + ", " + 
+				 RESORTWEATHER_WEATHERCODE_COLUMN + " integer  " + ");";
 
 
 
@@ -278,6 +281,10 @@ public class WebcamProvider extends ContentProvider {
             super(context, name, factory, version);
         }
 
+        // Called when no database exists in disk and the helper class needs
+        // to create a new one.
+
+
         private void fillRow(SQLiteDatabase db, ContentValues c, String resort, String url, boolean  favourite, String description){
             c.clear();
             c.put(WEBCAM_RESORT_COLUMN, resort);
@@ -312,14 +319,15 @@ public class WebcamProvider extends ContentProvider {
 
 
         // Called when no database exists in disk and the helper class needs
-        // to create a new one. 
+        // to create a new one.
         @Override
-        public void onCreate(SQLiteDatabase db) {      
+        public void onCreate(SQLiteDatabase db) {
             db.execSQL(DATABASE_WEBCAM_CREATE);
-			db.execSQL(DATABASE_RESORTWEATHER_CREATE);
+            db.execSQL(DATABASE_RESORTWEATHER_CREATE);
             fillTables(db);
-			
+
         }
+
 
         // Called when there is a database version mismatch meaning that the version
         // of the database on disk needs to be upgraded to the current version.

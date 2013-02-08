@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import com.actionbarsherlock.app.SherlockListFragment;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProvider;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProviderClient;
+import com.whiterabbit.appennino.data.WebcamProvider;
+import com.whiterabbit.appennino.data.WebcamProviderClient;
 import com.whiterabbit.postman.utils.Constants;
 
 public class WebcamsListFragment extends SherlockListFragment{

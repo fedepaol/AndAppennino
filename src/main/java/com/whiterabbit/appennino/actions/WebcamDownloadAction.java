@@ -3,7 +3,7 @@ package com.whiterabbit.appennino.actions;
 import android.content.Context;
 import android.os.Parcel;
 import com.whiterabbit.appennino.AppenninoApplication;
-import com.whiterabbit.appennino.com.whiterabbit.appennino.data.WebcamProviderClientExt;
+import com.whiterabbit.appennino.data.WebcamProviderClientExt;
 import com.whiterabbit.postman.commands.RestServerRequest;
 import com.whiterabbit.postman.exceptions.ResultParseException;
 import org.scribe.model.OAuthRequest;
@@ -20,13 +20,14 @@ import java.util.Date;
  * Time: 12:10 PM
  */
 public class WebcamDownloadAction implements RestServerRequest{
-    long mWebcamId;
-    String mUrl;
+    private final long mWebcamId;
+    private final String mUrl;
 
     public WebcamDownloadAction(String url, long webcamid){
         mUrl = url;
         mWebcamId = webcamid;
     }
+
 
 
     @Override
@@ -79,7 +80,7 @@ public class WebcamDownloadAction implements RestServerRequest{
         }
     };
 
-    public WebcamDownloadAction(Parcel in){
+    private WebcamDownloadAction(Parcel in){
         mUrl = in.readString();
         mWebcamId = in.readLong();
     }

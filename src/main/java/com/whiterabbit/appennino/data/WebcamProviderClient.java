@@ -95,7 +95,7 @@ public class WebcamProviderClient{
     }
 
 	// -------------- RESORTWEATHER HELPERS ------------------
-    public static Uri addResortWeather(String Resort, String Description, String Temperature, String Wind, String Visibility, String IconUrl, Context c){
+    public static Uri addResortWeather(String Resort, String Description, String Temperature, String Wind, String Visibility, String IconUrl, Long WeatherCode, Context c){
      ContentValues contentValues = new ContentValues();
        contentValues.put(WebcamProvider.RESORTWEATHER_RESORT_COLUMN, Resort);
        contentValues.put(WebcamProvider.RESORTWEATHER_DESCRIPTION_COLUMN, Description);
@@ -103,6 +103,7 @@ public class WebcamProviderClient{
        contentValues.put(WebcamProvider.RESORTWEATHER_WIND_COLUMN, Wind);
        contentValues.put(WebcamProvider.RESORTWEATHER_VISIBILITY_COLUMN, Visibility);
        contentValues.put(WebcamProvider.RESORTWEATHER_ICONURL_COLUMN, IconUrl);
+       contentValues.put(WebcamProvider.RESORTWEATHER_WEATHERCODE_COLUMN, WeatherCode);
     	ContentResolver cr = c.getContentResolver();
     	return cr.insert(WebcamProvider.RESORTWEATHER_URI, contentValues);
     }
@@ -127,7 +128,8 @@ public class WebcamProviderClient{
     		WebcamProvider.RESORTWEATHER_TEMPERATURE_COLUMN,
     		WebcamProvider.RESORTWEATHER_WIND_COLUMN,
     		WebcamProvider.RESORTWEATHER_VISIBILITY_COLUMN,
-    		WebcamProvider.RESORTWEATHER_ICONURL_COLUMN  }; 
+    		WebcamProvider.RESORTWEATHER_ICONURL_COLUMN,
+    		WebcamProvider.RESORTWEATHER_WEATHERCODE_COLUMN  }; 
     
         String where = null;    
         String whereArgs[] = null;
@@ -146,7 +148,8 @@ public class WebcamProviderClient{
     		WebcamProvider.RESORTWEATHER_TEMPERATURE_COLUMN,
     		WebcamProvider.RESORTWEATHER_WIND_COLUMN,
     		WebcamProvider.RESORTWEATHER_VISIBILITY_COLUMN,
-    		WebcamProvider.RESORTWEATHER_ICONURL_COLUMN  };
+    		WebcamProvider.RESORTWEATHER_ICONURL_COLUMN,
+    		WebcamProvider.RESORTWEATHER_WEATHERCODE_COLUMN  };
     
         Uri rowAddress = ContentUris.withAppendedId(WebcamProvider.RESORTWEATHER_URI, rowId);
     
@@ -158,7 +161,7 @@ public class WebcamProviderClient{
         return resultCursor;
     }
 
-    public static int updateResortWeather(long rowId, String Resort, String Description, String Temperature, String Wind, String Visibility, String IconUrl, Context c){
+    public static int updateResortWeather(long rowId, String Resort, String Description, String Temperature, String Wind, String Visibility, String IconUrl, Long WeatherCode, Context c){
      ContentValues contentValues = new ContentValues();
        contentValues.put(WebcamProvider.RESORTWEATHER_RESORT_COLUMN, Resort);
        contentValues.put(WebcamProvider.RESORTWEATHER_DESCRIPTION_COLUMN, Description);
@@ -166,6 +169,7 @@ public class WebcamProviderClient{
        contentValues.put(WebcamProvider.RESORTWEATHER_WIND_COLUMN, Wind);
        contentValues.put(WebcamProvider.RESORTWEATHER_VISIBILITY_COLUMN, Visibility);
        contentValues.put(WebcamProvider.RESORTWEATHER_ICONURL_COLUMN, IconUrl);
+       contentValues.put(WebcamProvider.RESORTWEATHER_WEATHERCODE_COLUMN, WeatherCode);
     
         Uri rowURI = ContentUris.withAppendedId(WebcamProvider.RESORTWEATHER_URI, rowId); 
     
