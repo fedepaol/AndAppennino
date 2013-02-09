@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.os.Parcel;
 import com.whiterabbit.appennino.data.WebcamProviderClient;
 import com.whiterabbit.appennino.data.WebcamProviderClientExt;
+import com.whiterabbit.appennino.utils.PrefUtils;
 import com.whiterabbit.postman.commands.RestServerRequest;
 import com.whiterabbit.postman.exceptions.ResultParseException;
 import org.codehaus.jackson.JsonFactory;
@@ -58,6 +59,8 @@ public class MeteoDownloadAction implements RestServerRequest{
                 WebcamProviderClient.addResortWeather(mResort, description, temperature, wind,
                                                          visibility, imageUrl, weatherCode, c);
             }
+
+        PrefUtils.setMeteoLastUpdate(c);// This will be repeated several times
 
     }
 

@@ -134,6 +134,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         invalidateOptionsMenu();
     }
 
+    // If older than 10 minutes won't wait user interaction
     private void checkAutoUpdate(){
         // TODO Should be done in background
         Cursor c = WebcamProviderClient.getWebcam(mWebcamId, this);
@@ -149,9 +150,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
                 //TODO
             }
             setUpdating();
-
         }
-
 
     }
 

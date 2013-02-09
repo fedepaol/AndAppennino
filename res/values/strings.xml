@@ -5,4 +5,6 @@
     <string name="download_error">There was a problem connecting to the server</string>
     <string name="weather_wind_speed">Wind Speed: %s Km/h</string>
     <string name="weather_visibility">Visibility: %s Km</string>
+    <string name="weather_error">There was an error while updating the weather</string>
+    <string name="webcam_error">There was an error while updating the webcam</string>
 </resources>
