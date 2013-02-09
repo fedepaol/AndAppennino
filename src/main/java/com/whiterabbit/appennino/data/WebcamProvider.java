@@ -18,7 +18,7 @@ import android.util.Log;
 
 public class WebcamProvider extends ContentProvider {
     private static final String DATABASE_NAME = "dbFileDb.db";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 11;
     private static final String TAG = "WebcamProvider";
 
 

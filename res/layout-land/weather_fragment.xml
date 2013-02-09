@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/weather_border"
+                android:padding="@dimen/margin_small" >
+
+<ImageView
+        style="@style/WeatherImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/weather_image" />
+<TextView
+        style="@style/WeatherText.Temperature"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/weather_wind"
+        android:id="@+id/weather_temperature" />
+
+<TextView
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        style="@style/WeatherText.Others"
+        android:id="@+id/weather_wind" />
+
+<TextView
+        style="@style/WeatherText.Others"
+        android:layout_below="@id/weather_wind"
+        android:layout_alignParentRight="true"
+        android:id="@+id/weather_visibility" />
+
+</RelativeLayout>

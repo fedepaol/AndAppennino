@@ -33,4 +33,16 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="WebcamDetailText">
+        <item name="android:textColor">@color/lightest_brown</item>
+        <item name="android:textSize">@dimen/text_size_xxlarge</item>
+        <item name="android:padding">@dimen/margin_small</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="WebcamDetailText.LastUpdate">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
 </resources>

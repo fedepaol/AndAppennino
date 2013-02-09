@@ -55,7 +55,7 @@ public class FirstActivity extends SherlockFragmentActivity implements ActionBar
 
 
     private void getMeteoResort(){
-        if(mResort != 0 && !mServer.isRequestAlreadyPending(METEO_REQUEST)){   // TODO Remove me
+        if(!mServer.isRequestAlreadyPending(METEO_REQUEST)){   // TODO Remove me
             MeteoDownloadAction a = new MeteoDownloadAction(mResorts[mResort]);
             try {
                 mServer.sendRestAction(this, METEO_REQUEST, a);
@@ -105,11 +105,8 @@ public class FirstActivity extends SherlockFragmentActivity implements ActionBar
         String where = null;
         String sortOrder = null;
 
-        String[] whereArgs = null;
-        if(mResort > 0){
-            where = "Resort=?";
-            whereArgs = new String[]{mResorts[mResort]};
-        }
+        where = "Resort=?";
+        String[] whereArgs = new String[]{mResorts[mResort]};
 
         // Query URI
         Uri queryUri = WebcamProvider.WEBCAM_URI;

@@ -2,21 +2,23 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
+              android:padding="@dimen/margin_medium"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <TextView
-            android:id="@+id/webcamdetail_location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            style="@style/WebcamDetailText"
+            android:id="@+id/webcamdetail_location" />
 
-    <TextView
-               android:id="@+id/webcamdetail_lastupdate"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"/>
 
-    <uk.co.senab.bitmapcache.CacheableImageView android:id="@+id/webcamdetail_image"
+    <com.whiterabbit.appennino.views.AspectRatioImageView android:id="@+id/webcamdetail_image"
+               android:layout_height="wrap_content"
+               android:scaleType="fitStart"
+               android:adjustViewBounds="true"
                android:layout_width="fill_parent"
-               android:layout_height="match_parent"
                />
+    <TextView
+            style="@style/WebcamDetailText.LastUpdate"
+            android:id="@+id/webcamdetail_lastupdate"
+            android:layout_width="fill_parent"/>
 
 </LinearLayout>
