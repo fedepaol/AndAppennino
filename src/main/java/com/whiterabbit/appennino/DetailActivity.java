@@ -1,6 +1,7 @@
 package com.whiterabbit.appennino;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.Toast;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
@@ -8,9 +9,13 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
 import com.whiterabbit.appennino.actions.WebcamDownloadAction;
+import com.whiterabbit.appennino.data.WebcamProvider;
+import com.whiterabbit.appennino.data.WebcamProviderClient;
 import com.whiterabbit.postman.ServerInteractionHelper;
 import com.whiterabbit.postman.ServerInteractionResponseInterface;
 import com.whiterabbit.postman.exceptions.SendingCommandException;
+
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,7 +55,6 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         mServerHelper = ServerInteractionHelper.getInstance(this);
         mDetailFragment = (WebcamDetailFragment) getSupportFragmentManager().findFragmentById(R.id.webcam_detail_fragment);
 
-        mDetailFragment.update(mTitle, mUrl, mWebcamId);
     }
 
     @Override
@@ -59,8 +63,12 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         mServerHelper.registerEventListener(this, this);
         setSupportProgressBarIndeterminateVisibility(false);
 
+        mDetailFragment.update(mTitle, mUrl, mWebcamId);
+
         if(mServerHelper.isRequestAlreadyPending(mUrl)){
             setUpdating();
+        }else{
+            checkAutoUpdate();
         }
     }
 
@@ -124,6 +132,27 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         mUpdating = false;
         setSupportProgressBarIndeterminateVisibility(false);
         invalidateOptionsMenu();
+    }
+
+    private void checkAutoUpdate(){
+        // TODO Should be done in background
+        Cursor c = WebcamProviderClient.getWebcam(mWebcamId, this);
+        c.moveToFirst();
+        long lastUpdate = c.getLong(WebcamProvider.WEBCAM_LASTUPDATE_COLUMN_POSITION);
+        Date d = new Date();
+
+        long millisec = d.getTime() - lastUpdate;
+        if(millisec > 1000 * 60 * 10){  // 10 minutes
+            try {
+                mServerHelper.sendRestAction(this, mUrl, new WebcamDownloadAction(mUrl, mWebcamId));
+            } catch (SendingCommandException e) {
+                //TODO
+            }
+            setUpdating();
+
+        }
+
+
     }
 
 

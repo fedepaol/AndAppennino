@@ -62,6 +62,7 @@ public class WebcamDetailFragment extends SherlockFragment{
     }
 
     public void update(String location, String url, long webcamId){
+        // This should be done in background
         Cursor c = WebcamProviderClient.getWebcam(webcamId, getSherlockActivity());
         c.moveToFirst();
         long lastUpdate = c.getLong(WebcamProvider.WEBCAM_LASTUPDATE_COLUMN_POSITION);
