@@ -34,11 +34,13 @@
         <item name="android:actionBarTabStyle">@style/appennino_ActionBarTabStyle</item>
         <item name="android:actionDropDownStyle">@style/appennino_DropDownNav</item>
         <item name="android:actionBarStyle">@style/appennino_solid_ActionBar</item>
+        <item name="actionBarStyle">@style/appennino_solid_ActionBar</item>
         <item name="android:panelBackground">@drawable/menu_hardkey_panel_appennino</item>
 
 
         <!-- Personalized spinner color -->
         <item name="android:spinnerItemStyle">@style/appennino_DropDownItem</item>
+        <item name="spinnerItemStyle">@style/appennino_DropDownItem</item>
 
     </style>
 
@@ -59,6 +61,7 @@
 
         <!-- personalized text color -->
         <item name="android:titleTextStyle">@style/AndAppennino.ActionBar.TitleTextStyle</item>
+        <item name="titleTextStyle">@style/AndAppennino.ActionBar.TitleTextStyle</item>
     </style>
 
     <style name="appennino_transparent_ActionBar" parent="@style/Widget.Sherlock.Light.ActionBar">

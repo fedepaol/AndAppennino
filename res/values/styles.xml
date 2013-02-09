@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="WeatherImage">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WeatherText">
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WeatherText.Temperature">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_size_superhuge</item>
+    </style>
+
+    <style name="WeatherText.Others">
+        <item name="android:textSize">@dimen/text_size_small</item>
+    </style>
+
+    <style name="MeteoFragment">
+        <item name="android:layout_margin">@dimen/margin_small</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WebcamElement">
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:padding">@dimen/margin_small</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>

@@ -5,10 +5,12 @@
     android:layout_height="fill_parent"
     android:padding="0dip" >
 <fragment android:name="com.whiterabbit.appennino.MeteoFragment"
-              android:layout_height="wrap_content"
-              android:layout_width="match_parent"
-              android:id="@+id/meteo_fragment" />
+          style="@style/MeteoFragment"
+          android:layout_gravity="center_horizontal"
+          android:id="@+id/meteo_fragment" />
 <fragment android:name="com.whiterabbit.appennino.WebcamsListFragment"
+          android:layout_marginLeft="@dimen/margin_small"
+          android:layout_marginRight="@dimen/margin_small"
           android:layout_height="match_parent"
           android:layout_width="match_parent"
           android:id="@+id/webcams_fragment" />

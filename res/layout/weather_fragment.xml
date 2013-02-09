@@ -1,35 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.GridLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:grid="http://schemas.android.com/apk/res-auto"
-        android:background="@drawable/weather_border"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        grid:columnCount="4"
-        grid:alignmentMode="alignBounds" >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/weather_border"
+                android:padding="@dimen/margin_medium" >
 
 <ImageView
-        grid:layout_rowSpan="3"
-        android:src="@drawable/showers"
+        style="@style/WeatherImage"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:id="@+id/weather_image" />
 <TextView
-        android:layout_width="0dip"
-        grid:layout_gravity="fill_horizontal"
-        grid:layout_column="2"
-        grid:layout_row="0"
-        android:textSize="@dimen/text_size_superhuge"
+        style="@style/WeatherText.Temperature"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
         android:id="@+id/weather_temperature" />
 
 <TextView
-        grid:layout_column="2"
-        grid:layout_gravity="fill_horizontal"
-        android:textSize="@dimen/text_size_small"
+        android:layout_below="@id/weather_temperature"
+        android:layout_alignParentRight="true"
+        style="@style/WeatherText.Others"
         android:id="@+id/weather_wind" />
 
 <TextView
-        grid:layout_gravity="fill_horizontal"
-        grid:layout_column="2"
-        android:textSize="@dimen/text_size_small"
+        style="@style/WeatherText.Others"
+        android:layout_below="@id/weather_wind"
+        android:layout_alignParentRight="true"
         android:id="@+id/weather_visibility" />
 
-</android.support.v7.widget.GridLayout>
+</RelativeLayout>
