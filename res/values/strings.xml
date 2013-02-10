@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="hello">Hello AndAppennino!</string>
     <string name="app_name">AndAppennino</string>
     <string name="download_error">There was a problem connecting to the server</string>
     <string name="weather_wind_speed">Wind Speed: %s Km/h</string>

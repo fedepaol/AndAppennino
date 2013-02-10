@@ -18,7 +18,7 @@ import android.util.Log;
 
 public class WebcamProvider extends ContentProvider {
     private static final String DATABASE_NAME = "dbFileDb.db";
-    private static final int DATABASE_VERSION = 11;
+    private static final int DATABASE_VERSION = 13;
     private static final String TAG = "WebcamProvider";
 
 
@@ -300,15 +300,30 @@ public class WebcamProvider extends ContentProvider {
             try{
                 db.beginTransaction();
                 ContentValues contentValues = new ContentValues();
-                fillRow(db, contentValues, "Abetone", "http://www.aptabetone.it/abetone/pics/lat001.jpg", false, "Piazzale abetone");
-                fillRow(db, contentValues, "Abetone", "http://www.meteo-system.com/stazioni/valdiluce.jpg", false, "Val di luce");
+                fillRow(db, contentValues, "Abetone", "http://www.aptabetone.it/abetone/pics/lat001.jpg", false, "Piazzale Abetone");
                 fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-9.jpg", false, "Monte gomito");
-                fillRow(db, contentValues, "Abetone", "http://www.albergotosca.it/webcam/abetonealbergotosca.jpg ", false, "Le regine");
-                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-3.jpg", false, "Val di luce Albergone");
-                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/funivia.jpg", false, "Passo del lupo");
-                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/panorama.jpg", false, "Monte cimone");
+                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-3.jpg", false, "Val di Luce Albergone");
+                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-1.jpg", false, "Tre Potenze");
+                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-2.jpg", false, "Rifugio Selletta");
+                fillRow(db, contentValues, "Abetone", "http://srv2.realcam.it/live/pub/34-7.jpg", false, "Val di Luce");
+                fillRow(db, contentValues, "Abetone", "http://www.meteo-system.com/stazioni/valdiluce.jpg", false, "Val di Luce Strada");
+                fillRow(db, contentValues, "Abetone", "http://www.albergotosca.it/webcam/abetonealbergotosca.jpg ", false, "Le Regine");
+
+
+
+
+                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/funivia.jpg", false, "Passo del Lupo");
+                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/lagoninfa.jpg", false, "Lago della Ninfa");
                 fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/cimoncino.jpg", false, "Cimoncino");
-                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/polle.jpg", false, "Le polle");
+                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/polle.jpg", false, "Le Polle");
+                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/cimone2.jpg", false, "Stadio dello Slalom");
+                fillRow(db, contentValues, "Cimone", "http://www.hotelcalvanella.it/webcam.jpg", false, "Pian del Falco");
+                fillRow(db, contentValues, "Cimone", "http://www.cimonesci.it/cams/panorama.jpg", false, "Monte Cimone");
+                fillRow(db, contentValues, "Cimone", "http://www.digitalglobe.it/webcam/pieve.jpg", false, "Pievepelago");
+                fillRow(db, contentValues, "Cimone", "http://www.hoteldelcorso.info/webcam.jpg", false, "Sestola Paese");
+
+
+
 
                 db.setTransactionSuccessful();
             } catch (SQLException e) {

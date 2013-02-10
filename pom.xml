@@ -66,6 +66,16 @@
              <version>10</version>
              <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.google.android.admob</groupId>
+            <artifactId>admob</artifactId>
+            <version>6.2.1-r8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android.analytics</groupId>
+            <artifactId>analytics</artifactId>
+            <version>2</version>
+        </dependency>
     </dependencies>
 
     <build>

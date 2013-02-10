@@ -55,6 +55,7 @@ public class DetailActivity extends SherlockFragmentActivity implements ServerIn
         mServerHelper = ServerInteractionHelper.getInstance(this);
         mDetailFragment = (WebcamDetailFragment) getSupportFragmentManager().findFragmentById(R.id.webcam_detail_fragment);
 
+
     }
 
     @Override

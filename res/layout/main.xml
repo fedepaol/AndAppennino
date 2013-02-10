@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:padding="0dip" >
+
+
 <fragment android:name="com.whiterabbit.appennino.MeteoFragment"
           style="@style/MeteoFragment"
           android:layout_gravity="center_horizontal"
@@ -11,7 +14,16 @@
 <fragment android:name="com.whiterabbit.appennino.WebcamsListFragment"
           android:layout_marginLeft="@dimen/margin_small"
           android:layout_marginRight="@dimen/margin_small"
-          android:layout_height="match_parent"
+          android:layout_height="0dp"
+          android:layout_weight="1"
           android:layout_width="match_parent"
           android:id="@+id/webcams_fragment" />
+<com.google.ads.AdView android:id="@+id/adView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          ads:adUnitId="@string/admobkey"
+          ads:adSize="BANNER"
+          ads:testDevices="TEST_EMULATOR, TEST_DEVICE_ID"
+          ads:loadAdOnCreate="true"/>
+
 </LinearLayout>
