@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AndAppennino</string>
+    <string name="download_error">C\'è stato un problema con la connessione</string>
+    <string name="weather_wind_speed">Vento: %s Km/h</string>
+    <string name="weather_visibility">Visibilità: %s Km</string>
+    <string name="weather_error">C\'è stato un problema con l\'aggiornamento del meteo</string>
+    <string name="webcam_error">C\'è stato un problema con l\'aggiornamento della webcam</string>
+</resources>

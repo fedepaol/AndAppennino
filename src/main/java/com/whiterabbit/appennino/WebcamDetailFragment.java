@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockFragment;
 import com.whiterabbit.appennino.data.WebcamProvider;
 import com.whiterabbit.appennino.data.WebcamProviderClient;
+import com.whiterabbit.appennino.utils.PrefUtils;
 import uk.co.senab.bitmapcache.CacheableBitmapDrawable;
 import uk.co.senab.bitmapcache.CacheableImageView;
 
@@ -33,6 +34,7 @@ public class WebcamDetailFragment extends SherlockFragment{
 
         @Override
         protected CacheableBitmapDrawable doInBackground(String... strings) {
+            PrefUtils.getAndIncrementWebcamsViews(getActivity());
             return mApplication.getBitmapCache().get(strings[0]);
         }
 
@@ -62,7 +64,7 @@ public class WebcamDetailFragment extends SherlockFragment{
     }
 
     public void update(String location, String url, long webcamId){
-        // This should be done in background
+        // TODO This should be done in background
         Cursor c = WebcamProviderClient.getWebcam(webcamId, getSherlockActivity());
         c.moveToFirst();
         long lastUpdate = c.getLong(WebcamProvider.WEBCAM_LASTUPDATE_COLUMN_POSITION);

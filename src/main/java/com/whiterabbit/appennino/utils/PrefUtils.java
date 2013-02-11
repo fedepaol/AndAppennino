@@ -10,6 +10,7 @@ import java.util.Date;
 public class PrefUtils {
 	private final static String SELECTED_RESORT = "Resort";
     private final static String METEO_LAST_UPDATE = "MeteoUpdate";
+    private final static String HOW_MANY_WEBCAMS = "WebcamViews";
 	private final static String PREF_NAME = "com.whiterabbit.appennino";
 
 	public static int getSavedResort(Context c)
@@ -47,4 +48,18 @@ public class PrefUtils {
         SharedPreferences mySharedPreferences = c.getSharedPreferences(PREF_NAME, mode);
         return mySharedPreferences.getLong(METEO_LAST_UPDATE, 0);
     }
+
+   public static long getAndIncrementWebcamsViews(Context c)
+   {
+		int mode = Activity.MODE_PRIVATE;
+		SharedPreferences mySharedPreferences = c.getSharedPreferences(PREF_NAME, mode);
+		SharedPreferences.Editor editor = mySharedPreferences.edit();
+        long views = mySharedPreferences.getLong(HOW_MANY_WEBCAMS, 0);
+
+		editor.putLong(HOW_MANY_WEBCAMS, views + 1);
+		editor.commit();
+        return views;
+	}
+
+
 }
