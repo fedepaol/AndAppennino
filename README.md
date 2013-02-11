@@ -11,9 +11,13 @@ Credits:
 Opensource libraries used in this project.
 
 BitmapCache - Chris Banes
+
 ActionbarSherlock - Jake Warthon
-PostmanRingsTwiceLib - Federico Paolinelli
+
+PostmanRingsTwiceLib - Federico Paolinelli (myself)
+
 Jackson - json parsing library
+
 Scribe - Pablo Fernandez
 
 The weather information is kindly provided by www.worldweatheronline.com
