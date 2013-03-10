@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Parcel;
 import com.whiterabbit.appennino.AppenninoApplication;
 import com.whiterabbit.appennino.data.WebcamProviderClientExt;
+import com.whiterabbit.postman.commands.RequestExecutor;
 import com.whiterabbit.postman.commands.RestServerRequest;
 import com.whiterabbit.postman.exceptions.ResultParseException;
 import org.scribe.model.OAuthRequest;
@@ -46,7 +47,7 @@ public class WebcamDownloadAction implements RestServerRequest{
     }
 
     @Override
-    public void processHttpResult(Response result, Context context) throws ResultParseException {
+    public void processHttpResult(Response result, RequestExecutor executor, Context context) throws ResultParseException {
         // TODO Adjust size
         BitmapLruCache cache = AppenninoApplication.getApplication().getBitmapCache();
         cache.put(mUrl, result.getStream());

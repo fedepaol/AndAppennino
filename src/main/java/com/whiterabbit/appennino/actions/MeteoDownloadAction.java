@@ -6,6 +6,7 @@ import android.os.Parcel;
 import com.whiterabbit.appennino.data.WebcamProviderClient;
 import com.whiterabbit.appennino.data.WebcamProviderClientExt;
 import com.whiterabbit.appennino.utils.PrefUtils;
+import com.whiterabbit.postman.commands.RequestExecutor;
 import com.whiterabbit.postman.commands.RestServerRequest;
 import com.whiterabbit.postman.exceptions.ResultParseException;
 import org.codehaus.jackson.JsonFactory;
@@ -46,6 +47,7 @@ public class MeteoDownloadAction implements RestServerRequest{
         return Verb.GET;
     }
 
+
     // pretty sure there is a better way to handle this
     private void storeWeather(String description, String temperature, String wind,
                               String visibility, String imageUrl, long weatherCode,
@@ -65,7 +67,7 @@ public class MeteoDownloadAction implements RestServerRequest{
     }
 
     @Override
-    public void processHttpResult(Response result, Context context) throws ResultParseException {
+    public void processHttpResult(Response result, RequestExecutor executor, Context context) throws ResultParseException {
         String description = "";
         String temperature = "";
         String wind = "";

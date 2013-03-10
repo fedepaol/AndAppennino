@@ -19,7 +19,7 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.whiterabbit.postman</groupId>
+            <groupId>com.fedepaolapps.postman</groupId>
             <artifactId>library</artifactId>
             <type>apklib</type>
             <version>1.0.0</version>
